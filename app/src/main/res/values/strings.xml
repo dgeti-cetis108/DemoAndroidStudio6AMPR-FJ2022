@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HuevitoConCatsup</string>
+    <string name="app_hello">Hola Mundo!</string>
+    <string name="button_hello">Saludar!</string>
 </resources>
