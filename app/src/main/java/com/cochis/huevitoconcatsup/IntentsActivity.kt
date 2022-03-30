@@ -20,7 +20,6 @@ class IntentsActivity : AppCompatActivity() {
 
         var btnCalcularEdad = findViewById<Button>(R.id.buttonIntentsCalculateAge)
         btnCalcularEdad.setOnClickListener {
-            // TODO: add code to calculate age
             try {
                 val añoDeNacimiento =
                     findViewById<EditText>(R.id.editTextIntentsYearOfBirth).text.toString()
@@ -29,16 +28,19 @@ class IntentsActivity : AppCompatActivity() {
                 }
                 val añoActual = Calendar.getInstance().get(Calendar.YEAR)
                 val edad = añoActual - añoDeNacimiento.toInt()
+                // TODO: Si la edad esta entre 1-122 mostrar el calculo
                 var tuEdadEs = findViewById<TextView>(R.id.textViewIntentsEdad)
                 tuEdadEs.text = "Tu edad es: ${edad.toString()}"
-            } catch (ex: IllegalArgumentException) {
-                Toast.makeText(this,
-                    "El año es obligatorio, escribelo c...",
-                    Toast.LENGTH_SHORT
-                ).show()
+                // si la edad es mayor a 122 mostrar mensaje de demasiada edad para calcular
+                // el mensaje de demasiada edad debe salir en el TextView
             } catch (ex: NumberFormatException) {
                 Toast.makeText(this,
                     "Valor de año incorrecto",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } catch (ex: IllegalArgumentException) {
+                Toast.makeText(this,
+                    "El año es obligatorio, escribelo c...",
                     Toast.LENGTH_SHORT
                 ).show()
             }
