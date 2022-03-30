@@ -1,5 +1,6 @@
 package com.cochis.huevitoconcatsup
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,11 +29,12 @@ class IntentsActivity : AppCompatActivity() {
                 }
                 val añoActual = Calendar.getInstance().get(Calendar.YEAR)
                 val edad = añoActual - añoDeNacimiento.toInt()
-                // TODO: Si la edad esta entre 1-122 mostrar el calculo
                 var tuEdadEs = findViewById<TextView>(R.id.textViewIntentsEdad)
-                tuEdadEs.text = "Tu edad es: ${edad.toString()}"
-                // si la edad es mayor a 122 mostrar mensaje de demasiada edad para calcular
-                // el mensaje de demasiada edad debe salir en el TextView
+                if (edad > 122) {
+                    tuEdadEs.text = "Demasiada edad para calcular"
+                } else {
+                    tuEdadEs.text = "Tu edad es: ${edad.toString()}"
+                }
             } catch (ex: NumberFormatException) {
                 Toast.makeText(this,
                     "Valor de año incorrecto",
@@ -49,7 +51,11 @@ class IntentsActivity : AppCompatActivity() {
 
         var btnSiguiente = findViewById<Button>(R.id.buttonIntentsNext)
         btnSiguiente.setOnClickListener {
-            // TODO: add code to call another activity
+            val intent = Intent(this, AnotherActivity::class.java)
+            this.startActivity(intent)
+            // this.finish()
+            // TODO: Busca la manera de agregar el boton de back en Another Activity
+            // y ya que la encuentres agregala y has que funcione
         }
     }
 }
